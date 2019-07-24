@@ -7,12 +7,10 @@ public class ParsersTest {
     @Test
     void canParseWordToRomanNumeralStatement(){
         WordsToRomanParser wordsToRomanParser = new WordsToRomanParser();
-
         assertArrayEquals(new String[]{"glob","I"}, wordsToRomanParser.parse("glob is I"));
         assertArrayEquals(new String[]{"prok","V"}, wordsToRomanParser.parse("prok is V"));
         assertArrayEquals(new String[]{"pish","X"}, wordsToRomanParser.parse("pish is X"));
         assertArrayEquals(new String[]{"tegj","L"}, wordsToRomanParser.parse("tegj is L"));
-
     }
 
     @Test
@@ -21,7 +19,6 @@ public class ParsersTest {
         assertArrayEquals(new String[]{"glob glob","Silver","34"}, wordsToCreditsParser.parse("glob glob Silver is 34 Credits"));
         assertArrayEquals(new String[]{"glob prok","Gold","57800"}, wordsToCreditsParser.parse("glob prok Gold is 57800 Credits"));
         assertArrayEquals(new String[]{"pish pish","Iron","3910"}, wordsToCreditsParser.parse("pish pish Iron is 3910 Credits"));
-
     }
 
 
@@ -37,7 +34,6 @@ public class ParsersTest {
     void canParseHowMuchTypeQuestions(){
         QuestionToWordsParser parser = new QuestionToWordsParser();
         assertArrayEquals(new String[]{"pish tegj glob glob"}, parser.parse("how much is pish tegj glob glob ? "));
-
     }
 
     @Test
@@ -51,8 +47,13 @@ public class ParsersTest {
 
     @Test
     void wordsStoredInHashMap(){
-
+        ClassifyParser classifyParser = new ClassifyParser();
+        classifyParser.findParsedOutput("tegj is L");
+        classifyParser.findParsedOutput("prok is V");
+        assertEquals("L", AnswerQuery.ItemToRomanValueHashMap.get("tegj"));
+        assertEquals("V", AnswerQuery.ItemToRomanValueHashMap.get("prok"));
     }
+    
 
     @Test
     void wordsToRomanNumeralConversion(){
