@@ -2,7 +2,7 @@ package com.tavisca.workshops.mgalaxy.roman;
 import java.util.HashMap;
 
 
-public class WordToRomanParser {
+public class WordsToRomanParser implements Parser {
 
     public String[] parse(String query) {
         String[] words = query.split(" ");

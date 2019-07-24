@@ -1,9 +1,8 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
-public class WordsToCreditsParser {
-    public String[] parse(String query) {
-        String[] words = query.split(" ");
-        words = query.split(" is ");
+public class WordsToCreditsParser implements Parser{
+    public String[] parse(String query)  {
+        String[] words = query.split(" is ");
         String[] firstPart = words[0].split(" ");
 
         String itemName = firstPart[firstPart.length-1];

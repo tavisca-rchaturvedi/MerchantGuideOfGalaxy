@@ -1,6 +1,6 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
-public class QuestionToCreditWordsAndItemNameParser {
+public class QuestionToWordsAndItemNameParser implements Parser {
     public String[] parse(String query) {
         String part1 = query.split(" is ")[1];
         String[] words = part1.split(" ");
@@ -9,7 +9,6 @@ public class QuestionToCreditWordsAndItemNameParser {
         for(int i = 0; i < words.length-2; i++){
             amountInWords += words[i] + " ";
         }
-
         return new String[]{amountInWords.trim(), itemName};
     }
 }
