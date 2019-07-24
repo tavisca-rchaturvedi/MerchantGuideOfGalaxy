@@ -1,4 +1,4 @@
-package com.tavisca.workshops.mgalaxy.roman;
+package com.tavisca.workshops.mgalaxy.roman.parsers;
 
 public class QuestionToWordsAndItemNameParser implements Parser {
     public String[] parse(String query) {

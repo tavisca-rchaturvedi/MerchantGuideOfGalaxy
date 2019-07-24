@@ -1,6 +1,6 @@
-package com.tavisca.workshops.mgalaxy.roman;
+package com.tavisca.workshops.mgalaxy.roman.parsers;
 
-public class WordsToCreditsParser implements Parser{
+public class WordsToCreditsParser implements Parser {
     public String[] parse(String query)  {
         String[] words = query.split(" is ");
         String[] firstPart = words[0].split(" ");
@@ -11,9 +11,7 @@ public class WordsToCreditsParser implements Parser{
         for(int i =0; i < firstPart.length - 1; i++){
             amountInWords += firstPart[i] + " ";
         }
-
         String number = words[1].split(" ")[0];
-
         return new String[]{amountInWords.trim(), itemName, number};
     }
 }

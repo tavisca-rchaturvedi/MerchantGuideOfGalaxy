@@ -8,14 +8,14 @@ public class RomanToArabicTest {
 
     @Test
     void RomanStringToArabicNumeralConversion(){
-        String[] RomanStrings = new String[]{"VI", "XII"};
+        String[] RomanStrings = new String[]{"VI", "XII", "XIX"};
         int[] ArabicNumeral = new int[RomanStrings.length];
         int i =0;
         for(String roman : RomanStrings){
              ArabicNumeral[i++] = RomanToArabic.convert(roman);
         }
 
-        assertArrayEquals(new int[]{6,12},ArabicNumeral);
+        assertArrayEquals(new int[]{6,12,19},ArabicNumeral);
     }
 
 

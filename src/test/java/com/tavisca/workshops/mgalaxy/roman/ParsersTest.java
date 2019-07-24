@@ -1,5 +1,6 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
+import com.tavisca.workshops.mgalaxy.roman.parsers.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class ParsersTest {
@@ -50,15 +51,14 @@ public class ParsersTest {
         ClassifyParser classifyParser = new ClassifyParser();
         classifyParser.findParsedOutput("tegj is L");
         classifyParser.findParsedOutput("prok is V");
-        assertEquals("L", AnswerQuery.ItemToRomanValueHashMap.get("tegj"));
-        assertEquals("V", AnswerQuery.ItemToRomanValueHashMap.get("prok"));
+        assertEquals("L", WordsToNumeralCalculation.ItemToRomanValueHashMap.get("tegj"));
+        assertEquals("V", WordsToNumeralCalculation.ItemToRomanValueHashMap.get("prok"));
     }
-    
+
 
     @Test
     void wordsToRomanNumeralConversion(){
- //       WordsToRomanNumeral wordsToRomanNumeral = new WordsToRomanNumeral();
-//        assertArrayEquals("IV", wordsToRomanNumeral("glob prok"));
+
     }
 
 
