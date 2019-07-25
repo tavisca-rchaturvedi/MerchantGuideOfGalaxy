@@ -69,6 +69,7 @@ public class CalculationTests {
         assertEquals(42, romanToArabic.convert(romanNumeral));
     }
 
+
     @Test
     void AllGivenTestCasesWorking(){
         ClassifyParser classifyParser = new ClassifyParser();
