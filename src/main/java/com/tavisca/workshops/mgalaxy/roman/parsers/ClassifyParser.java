@@ -1,29 +1,23 @@
 package com.tavisca.workshops.mgalaxy.roman.parsers;
 
-
 public class ClassifyParser {
-    public String[] findParsedOutput(String query) {
-        String[] words = query.split(" ");
-        String[] output;
-        if(words.length == 3){
-            WordsToRomanParser wordsToRomanParser = new WordsToRomanParser();
-            output = wordsToRomanParser.parse(query);
+    public String[] processSentence(String query) {
+        Parser parser;
+        if(query.split(" ").length == 3){
+            parser = new WordsToRomanParser();
         }
         else if(query.startsWith("how many")){
-            QuestionToWordsAndItemNameParser questionToWordsAndItemNameParser = new QuestionToWordsAndItemNameParser();
-            output = questionToWordsAndItemNameParser.parse(query);
+            parser = new QuestionToWordsAndItemNameParser();
         }
         else if(query.startsWith("how much")){
-            QuestionToWordsParser questionToWordsParser = new QuestionToWordsParser();
-            output = questionToWordsParser.parse(query);
+            parser = new QuestionToWordsParser();
         }
         else if(query.endsWith("Credits")){
-            WordsToCreditsParser wordsToCreditsParser = new WordsToCreditsParser();
-            output = wordsToCreditsParser.parse(query);
+            parser = new WordsToCreditsParser();
         }
         else{
-            output = new String[]{};
+            parser = new UndefinedStrings();
         }
-        return output;
+        return parser.parse(query);
     }
 }

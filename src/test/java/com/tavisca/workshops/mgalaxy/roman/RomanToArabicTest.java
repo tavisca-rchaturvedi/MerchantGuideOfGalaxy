@@ -9,10 +9,11 @@ public class RomanToArabicTest {
     @Test
     void RomanStringToArabicNumeralConversion(){
         String[] RomanStrings = new String[]{"VI", "XII", "XIX", "MCMXLIV","MMVI"};
+        RomanToArabic romanToArabic = new RomanToArabic();
         int[] ArabicNumeral = new int[RomanStrings.length];
         int i =0;
         for(String roman : RomanStrings){
-             ArabicNumeral[i++] = RomanToArabic.convert(roman);
+             ArabicNumeral[i++] = romanToArabic.convert(roman);
         }
 
         assertArrayEquals(new int[]{6,12,19,1944,2006},ArabicNumeral);

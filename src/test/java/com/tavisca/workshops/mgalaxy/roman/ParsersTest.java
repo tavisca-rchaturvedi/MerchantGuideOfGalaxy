@@ -1,9 +1,17 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
 import com.tavisca.workshops.mgalaxy.roman.parsers.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class ParsersTest {
+
+    RomanNumeralCalculation romanCalculate;
+
+    @BeforeEach
+    void beforeEachTest(){
+        romanCalculate = new RomanNumeralCalculation();
+    }
 
     @Test
     void canParseWordToRomanNumeralStatement(){
@@ -40,19 +48,19 @@ public class ParsersTest {
     @Test
     void wordsCorrectlyClassifiedToParsers(){
         ClassifyParser classifyParser = new ClassifyParser();
-        assertArrayEquals(new String[]{"glob glob","Silver","34"}, classifyParser.findParsedOutput("glob glob Silver is 34 Credits"));
-        assertArrayEquals(new String[]{"glob prok","Iron"}, classifyParser.findParsedOutput("how many Credits is glob prok Iron ? "));
-        assertArrayEquals(new String[]{"tegj","L"}, classifyParser.findParsedOutput("tegj is L"));
-        assertArrayEquals(new String[]{"pish tegj glob glob"}, classifyParser.findParsedOutput("how much is pish tegj glob glob ? "));
+        assertArrayEquals(new String[]{"glob glob","Silver","34"}, classifyParser.processSentence("glob glob Silver is 34 Credits"));
+        assertArrayEquals(new String[]{"glob prok","Iron"}, classifyParser.processSentence("how many Credits is glob prok Iron ? "));
+        assertArrayEquals(new String[]{"tegj","L"}, classifyParser.processSentence("tegj is L"));
+        assertArrayEquals(new String[]{"pish tegj glob glob"}, classifyParser.processSentence("how much is pish tegj glob glob ? "));
     }
 
     @Test
     void wordsStoredInHashMap(){
         ClassifyParser classifyParser = new ClassifyParser();
-        classifyParser.findParsedOutput("tegj is L");
-        classifyParser.findParsedOutput("prok is V");
-        assertEquals("L", RomanNumeralCalculation.ItemToRomanValueHashMap.get("tegj"));
-        assertEquals("V", RomanNumeralCalculation.ItemToRomanValueHashMap.get("prok"));
+        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
+        assertEquals("L", romanCalculate.GetRomanValueFromItem("tegj"));
+        assertEquals("V", romanCalculate.GetRomanValueFromItem("prok"));
     }
 
 
