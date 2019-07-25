@@ -16,10 +16,6 @@ public class RomanToArabic {
 
     public static int convert(String roman) {
         int sum = 0;
-        for(char numeral: roman.toCharArray()){
-            sum += romanToArabicValuesHashMap.get(numeral);
-        }
-        sum = 0;
         for(int i = 0; i < roman.length()-1; i++){
             if(romanToArabicValuesHashMap.get(roman.charAt(i)) < romanToArabicValuesHashMap.get(roman.charAt(i+1))){
                 sum -= romanToArabicValuesHashMap.get(roman.charAt(i));
