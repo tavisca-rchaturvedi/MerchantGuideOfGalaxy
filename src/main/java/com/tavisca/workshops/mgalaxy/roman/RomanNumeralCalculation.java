@@ -1,9 +1,9 @@
 package com.tavisca.workshops.mgalaxy.roman;
 import java.util.HashMap;
 
-public class WordsToNumeralCalculation {
+public class RomanNumeralCalculation {
     public static HashMap<String, String> ItemToRomanValueHashMap = new HashMap<>();
-    public static HashMap<String, Integer> ItemToCreditValueHashmap = new HashMap<>();
+    public static HashMap<String, Double> ItemToCreditValueHashmap = new HashMap<>();
 
     public void StoreItemToRomanValue(String[] values){
         ItemToRomanValueHashMap.put(values[0], values[1]);

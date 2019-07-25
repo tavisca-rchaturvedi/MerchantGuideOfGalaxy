@@ -1,15 +1,15 @@
 package com.tavisca.workshops.mgalaxy.roman.parsers;
 
 
-import com.tavisca.workshops.mgalaxy.roman.WordsToNumeralCalculation;
+import com.tavisca.workshops.mgalaxy.roman.RomanNumeralCalculation;
 
 public class WordsToRomanParser implements Parser {
 
     public String[] parse(String query) {
         String[] words = query.split(" ");
-        WordsToNumeralCalculation wordsToNumeralCalculation = new WordsToNumeralCalculation();
+        RomanNumeralCalculation romanNumeralCalculation = new RomanNumeralCalculation();
         String[] output = new String[] {words[0], words[2]};
-        wordsToNumeralCalculation.StoreItemToRomanValue(output);
+        romanNumeralCalculation.StoreItemToRomanValue(output);
         return output;
     }
 }

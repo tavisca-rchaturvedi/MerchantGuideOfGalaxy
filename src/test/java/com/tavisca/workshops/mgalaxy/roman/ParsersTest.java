@@ -51,8 +51,8 @@ public class ParsersTest {
         ClassifyParser classifyParser = new ClassifyParser();
         classifyParser.findParsedOutput("tegj is L");
         classifyParser.findParsedOutput("prok is V");
-        assertEquals("L", WordsToNumeralCalculation.ItemToRomanValueHashMap.get("tegj"));
-        assertEquals("V", WordsToNumeralCalculation.ItemToRomanValueHashMap.get("prok"));
+        assertEquals("L", RomanNumeralCalculation.ItemToRomanValueHashMap.get("tegj"));
+        assertEquals("V", RomanNumeralCalculation.ItemToRomanValueHashMap.get("prok"));
     }
 
 
