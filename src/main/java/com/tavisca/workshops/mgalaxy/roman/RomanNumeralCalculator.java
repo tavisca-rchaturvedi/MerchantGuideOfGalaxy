@@ -21,7 +21,7 @@ public class RomanNumeralCalculator {
         return ItemToCreditValueHashmap.get(key);
     }
 
-    public String CalculateRomanNumeralFromAmountInWords(String amountInWords){
+    public String calculateRomanNumeralFromAmountInWords(String amountInWords){
         String[] words = amountInWords.split(" ");
         String romanNumeral = "";
         for(String word: words){
@@ -31,11 +31,12 @@ public class RomanNumeralCalculator {
         if(isValidRomanNumeral(romanNumeral))
             return romanNumeral;
         else
-            throw new RuntimeException("Roman Numeral Not valid");
+            return "";
     }
 
     // Todo : Implement the function finding whether given roman numeral is correct or not.
     public static boolean isValidRomanNumeral(String romanNumeral){
-        return true;
+        if(romanNumeral.contains("null"))return false;
+        else return true;
     }
 }

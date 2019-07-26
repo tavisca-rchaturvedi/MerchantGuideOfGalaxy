@@ -45,20 +45,12 @@ public class ParsersTest {
         assertArrayEquals(new String[]{"pish tegj glob glob"}, parser.parse("how much is pish tegj glob glob ? "));
     }
 
-    @Test
-    void wordsCorrectlyClassifiedToParsers(){
-        ClassifyingParser classifyingParser = new ClassifyingParser();
-        assertArrayEquals(new String[]{"glob glob","Silver","34"}, classifyingParser.processSentence("glob glob Silver is 34 Credits"));
-        assertArrayEquals(new String[]{"glob prok","Iron"}, classifyingParser.processSentence("how many Credits is glob prok Iron ? "));
-        assertArrayEquals(new String[]{"tegj","L"}, classifyingParser.processSentence("tegj is L"));
-        assertArrayEquals(new String[]{"pish tegj glob glob"}, classifyingParser.processSentence("how much is pish tegj glob glob ? "));
-    }
 
     @Test
     void wordsStoredInHashMap(){
-        ClassifyingParser classifyingParser = new ClassifyingParser();
-        romanNumeralCalculator.storeItemToRomanValue(classifyingParser.processSentence("tegj is L"));
-        romanNumeralCalculator.storeItemToRomanValue(classifyingParser.processSentence("prok is V"));
+        DriverClass driverClass = new DriverClass();
+        driverClass.processSentenceAndStoreAnswers("tegj is L", romanNumeralCalculator);
+        driverClass.processSentenceAndStoreAnswers("prok is V", romanNumeralCalculator);
         assertEquals("L", romanNumeralCalculator.GetRomanValueFromItem("tegj"));
         assertEquals("V", romanNumeralCalculator.GetRomanValueFromItem("prok"));
     }
