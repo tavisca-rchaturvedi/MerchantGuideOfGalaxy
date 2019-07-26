@@ -1,11 +1,11 @@
 package com.tavisca.workshops.mgalaxy.roman;
 import java.util.HashMap;
 
-public class RomanNumeralCalculation {
+public class RomanNumeralCalculator {
     public HashMap<String, String> ItemToRomanValueHashMap = new HashMap<>();
     public HashMap<String, Double> ItemToCreditValueHashmap = new HashMap<>();
 
-    public void StoreItemToRomanValue(String[] values){
+    public void storeItemToRomanValue(String[] values){
         ItemToRomanValueHashMap.put(values[0], values[1]);
     }
 

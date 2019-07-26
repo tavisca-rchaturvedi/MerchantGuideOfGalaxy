@@ -1,6 +1,6 @@
 package com.tavisca.workshops.mgalaxy.roman.parsers;
 
-public class ClassifyParser {
+public class ClassifyingParser {
     public String[] processSentence(String query) {
         Parser parser;
         if(query.split(" ").length == 3){

@@ -1,26 +1,26 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
-import com.tavisca.workshops.mgalaxy.roman.parsers.ClassifyParser;
+import com.tavisca.workshops.mgalaxy.roman.parsers.ClassifyingParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculationTests {
-    RomanNumeralCalculation romanCalculate;
+    RomanNumeralCalculator romanCalculate;
 
     @BeforeEach
     void beforeEachTest(){
-        romanCalculate = new RomanNumeralCalculation();
+        romanCalculate = new RomanNumeralCalculator();
     }
 
     @Test
     void AmountInWordsToRomanNumeralCalculation(){
-        ClassifyParser classifyParser = new ClassifyParser();
+        ClassifyingParser classifyingParser = new ClassifyingParser();
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("glob is I"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("prok is V"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("pish is X"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("tegj is L"));
 
         assertEquals("II", romanCalculate.CalculateRomanNumeralFromAmountInWords("glob glob"));
         assertEquals("IV", romanCalculate.CalculateRomanNumeralFromAmountInWords("glob prok"));
@@ -36,35 +36,34 @@ public class CalculationTests {
 
     @Test
     void CreditCalculatedByItemNameAndCreditPerItem(){
-        ClassifyParser classifyParser = new ClassifyParser();
+        ClassifyingParser classifyingParser = new ClassifyingParser();
         CalculateCredits calculate = new CalculateCredits();
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("glob is I"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("prok is V"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("pish is X"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("tegj is L"));
 
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
 
-        String[] StringsOfInterest = classifyParser.processSentence("how many Credits is glob prok Silver ? ");
+        String[] StringsOfInterest = classifyingParser.processSentence("how many Credits is glob prok Silver ? ");
 
         assertEquals(68, calculate.CalculateCredit(StringsOfInterest, romanCalculate));
     }
 
     @Test
     void WordsToArabicNumeralCalculation(){
-        ClassifyParser classifyParser = new ClassifyParser();
+        ClassifyingParser classifyingParser = new ClassifyingParser();
         RomanToArabic romanToArabic = new RomanToArabic();
 
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("glob is I"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("prok is V"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("pish is X"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("tegj is L"));
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
-
-        String[] stringOfInterest = classifyParser.processSentence("how much is pish tegj glob glob ? ");
+        String[] stringOfInterest = classifyingParser.processSentence("how much is pish tegj glob glob ? ");
         String romanNumeral = romanCalculate.CalculateRomanNumeralFromAmountInWords(stringOfInterest[0]);
         assertEquals(42, romanToArabic.convert(romanNumeral));
     }
@@ -72,33 +71,33 @@ public class CalculationTests {
 
     @Test
     void AllGivenTestCasesWorking(){
-        ClassifyParser classifyParser = new ClassifyParser();
+        ClassifyingParser classifyingParser = new ClassifyingParser();
         CalculateCredits calculate = new CalculateCredits();
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("glob is I"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("prok is V"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("pish is X"));
+        romanCalculate.storeItemToRomanValue(classifyingParser.processSentence("tegj is L"));
 
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
+        calculate.CalculateCreditPerItem(classifyingParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
 
-        String[] stringOfInterest = classifyParser.processSentence("how much is pish tegj glob glob ? ");
+        String[] stringOfInterest = classifyingParser.processSentence("how much is pish tegj glob glob ? ");
         String romanNumeral = romanCalculate.CalculateRomanNumeralFromAmountInWords(stringOfInterest[0]);
         assertEquals(42, RomanToArabic.convert(romanNumeral));
 
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Silver ? ");
+        stringOfInterest = classifyingParser.processSentence("how many Credits is glob prok Silver ? ");
         assertEquals(68, calculate.CalculateCredit(stringOfInterest, romanCalculate));
 
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Gold ? ");
+        stringOfInterest = classifyingParser.processSentence("how many Credits is glob prok Gold ? ");
         assertEquals(57800, calculate.CalculateCredit(stringOfInterest, romanCalculate));
 
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Iron ? ");
+        stringOfInterest = classifyingParser.processSentence("how many Credits is glob prok Iron ? ");
         assertEquals(782, calculate.CalculateCredit(stringOfInterest, romanCalculate));
 
-        stringOfInterest = classifyParser.processSentence("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?");
-        assertEquals("I have no idea what you are talking about", stringOfInterest[0]);
+        stringOfInterest = classifyingParser.processSentence("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?");
+        assertArrayEquals(new String[]{"I have no idea what you are talking about"}, stringOfInterest);
 
     }
 }
