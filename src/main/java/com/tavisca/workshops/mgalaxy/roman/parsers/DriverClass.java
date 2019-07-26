@@ -14,6 +14,7 @@ public class DriverClass {
         CalculateCredits calculateCredits = new CalculateCredits();
         String[] stringsOfInterest;
         Parser parser;
+
         if(query.split(" ").length == 3){
             parser = new WordsToRomanParser();
             romanNumeralCalculator.storeItemToRomanValue(parser.parse(query));
@@ -22,16 +23,12 @@ public class DriverClass {
             parser = new QuestionToWordsAndItemNameParser();
             stringsOfInterest = parser.parse(query);
             double creditValue = calculateCredits.calculateCredit(stringsOfInterest,romanNumeralCalculator);
-            String credtValueInString;
-            if(creditValue == (int) creditValue) credtValueInString = (int)creditValue + "";
-            else credtValueInString = creditValue + "";
-            this.queryToAnswer.put(query,stringsOfInterest[0] +  " " + stringsOfInterest[1] + " is " + credtValueInString + " Credits");
+            this.queryToAnswer.put(query,stringsOfInterest[0] +  " " + stringsOfInterest[1] + " is " + getCreditValue(creditValue) + " Credits");
         }
-        else if(query.startsWith("how much")){
+        else if(query.startsWith("how much is ")){
             parser = new QuestionToWordsParser();
             stringsOfInterest = parser.parse(query);
             String romanNumeral = romanNumeralCalculator.calculateRomanNumeralFromAmountInWords(stringsOfInterest[0]);
-            System.out.println(romanNumeral);
             if(romanNumeral.length() > 0)
                 this.queryToAnswer.put(query,stringsOfInterest[0] + " is " +RomanToArabic.convert(romanNumeral));
             else
@@ -47,7 +44,14 @@ public class DriverClass {
             stringsOfInterest = parser.parse(query);
             this.queryToAnswer.put(query, stringsOfInterest[0]);
         }
-        //return parser.parse(query);
+    }
+
+    public String getCreditValue(double creditValue){
+        String creditValueInString;
+        if(creditValue == (int) creditValue) creditValueInString = (int)creditValue + "";
+        else creditValueInString = creditValue + "";
+
+        return creditValueInString;
     }
 
    public String getQueryToAnswer(String query){
