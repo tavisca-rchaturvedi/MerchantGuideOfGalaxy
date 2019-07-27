@@ -8,7 +8,7 @@ public class CalculateCredits {
         return answer;
     }
 
-    public void calculateCreditPerItem(String[] Output, RomanNumeralCalculator romanCalculate){
+    public void calculateAndStoreCreditPerItem(String[] Output, RomanNumeralCalculator romanCalculate){
         double numberOfItems = RomanToArabic.convert(romanCalculate.calculateRomanNumeralFromAmountInWords(Output[0]));
         double credits = Integer.parseInt(Output[2]);
         romanCalculate.StoreItemToCreditValue(Output[1], credits/numberOfItems);
