@@ -1,108 +1,101 @@
 package com.tavisca.workshops.mgalaxy.roman;
 
-import com.tavisca.workshops.mgalaxy.roman.parsers.ClassifyParser;
+import com.tavisca.workshops.mgalaxy.roman.parsers.DriverClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculationTests {
-    RomanNumeralCalculation romanCalculate;
+    RomanNumeralCalculator romanCalculate;
+    DriverClass driverClass;
+    CalculateCredits calculate;
+    String query;
 
     @BeforeEach
     void beforeEachTest(){
-        romanCalculate = new RomanNumeralCalculation();
+        romanCalculate = new RomanNumeralCalculator();
+        driverClass = new DriverClass();
+        calculate = new CalculateCredits();
     }
 
-    @Test
-    void AmountInWordsToRomanNumeralCalculation(){
-        ClassifyParser classifyParser = new ClassifyParser();
+    void initializeFirstStatements(){
+        driverClass.processSentenceAndStoreAnswers("glob is I", romanCalculate);
+        driverClass.processSentenceAndStoreAnswers("prok is V", romanCalculate);
+        driverClass.processSentenceAndStoreAnswers("pish is X", romanCalculate);
+        driverClass.processSentenceAndStoreAnswers("tegj is L", romanCalculate);
+    }
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
-
-        assertEquals("II", romanCalculate.CalculateRomanNumeralFromAmountInWords("glob glob"));
-        assertEquals("IV", romanCalculate.CalculateRomanNumeralFromAmountInWords("glob prok"));
-        assertEquals("XX", romanCalculate.CalculateRomanNumeralFromAmountInWords("pish pish"));
+    void initializeSecondStatements(){
+        driverClass.processSentenceAndStoreAnswers("glob glob Silver is 34 Credits", romanCalculate);
+        driverClass.processSentenceAndStoreAnswers("glob prok Gold is 57800 Credits", romanCalculate);
+        driverClass.processSentenceAndStoreAnswers("pish pish Iron is 3910 Credits", romanCalculate);
     }
 
 
     @Test
-    void RomanToArabicNumeralCalculation(){
+    void amountInWordsToRomanNumeralCalculation(){
+        initializeFirstStatements();
+
+        assertEquals("II", romanCalculate.calculateRomanNumeralFromAmountInWords("glob glob"));
+        assertEquals("IV", romanCalculate.calculateRomanNumeralFromAmountInWords("glob prok"));
+        assertEquals("XX", romanCalculate.calculateRomanNumeralFromAmountInWords("pish pish"));
+    }
+
+
+    @Test
+    void romanToArabicNumeralCalculation(){
         RomanToArabic romanToArabic = new RomanToArabic();
         assertEquals(2,romanToArabic.convert("II"));
     }
 
     @Test
-    void CreditCalculatedByItemNameAndCreditPerItem(){
-        ClassifyParser classifyParser = new ClassifyParser();
-        CalculateCredits calculate = new CalculateCredits();
+    void creditCalculatedByItemNameAndCreditPerItem(){
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        initializeFirstStatements();
+        initializeSecondStatements();
+        query = "how many Credits is glob prok Silver ? ";
 
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
-
-        String[] StringsOfInterest = classifyParser.processSentence("how many Credits is glob prok Silver ? ");
-
-        assertEquals(68, calculate.CalculateCredit(StringsOfInterest, romanCalculate));
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("glob prok Silver is 68 Credits", driverClass.getQueryToAnswer(query));
     }
 
     @Test
-    void WordsToArabicNumeralCalculation(){
-        ClassifyParser classifyParser = new ClassifyParser();
+    void wordsToArabicNumeralCalculation(){
         RomanToArabic romanToArabic = new RomanToArabic();
 
+        initializeFirstStatements();
+        query = "how much is pish tegj glob glob ? ";
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
-
-        String[] stringOfInterest = classifyParser.processSentence("how much is pish tegj glob glob ? ");
-        String romanNumeral = romanCalculate.CalculateRomanNumeralFromAmountInWords(stringOfInterest[0]);
-        assertEquals(42, romanToArabic.convert(romanNumeral));
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("pish tegj glob glob is 42", driverClass.getQueryToAnswer(query));
     }
 
+
     @Test
-    void AllGivenTestCasesWorking(){
-        ClassifyParser classifyParser = new ClassifyParser();
-        CalculateCredits calculate = new CalculateCredits();
+    void allGivenTestCasesWorking(){
 
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("glob is I"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("prok is V"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("pish is X"));
-        romanCalculate.StoreItemToRomanValue(classifyParser.processSentence("tegj is L"));
+        initializeFirstStatements();
+        initializeSecondStatements();
 
-        System.out.println("This is roman nummeral ");
+        query = "how much is pish tegj glob glob ? ";
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("pish tegj glob glob is 42", driverClass.getQueryToAnswer(query));
 
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob glob Silver is 34 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("glob prok Gold is 57800 Credits"), romanCalculate);
-        calculate.CalculateCreditPerItem(classifyParser.processSentence("pish pish Iron is 3910 Credits"), romanCalculate);
+        query = "how many Credits is glob prok Silver ? ";
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("glob prok Silver is 68 Credits", driverClass.getQueryToAnswer(query));
 
-        System.out.println("This is roman nummeral ");
-        String[] stringOfInterest = classifyParser.processSentence("how much is pish tegj glob glob ? ");
-        System.out.println("This is roman nummeral " + stringOfInterest[0]);
+        query = "how many Credits is glob prok Gold ? ";
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("glob prok Gold is 57800 Credits", driverClass.getQueryToAnswer(query));
 
-        String romanNumeral = romanCalculate.CalculateRomanNumeralFromAmountInWords(stringOfInterest[0]);
-        assertEquals(42, RomanToArabic.convert(romanNumeral));
+        query = "how many Credits is glob prok Iron ? ";
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("glob prok Iron is 782 Credits", driverClass.getQueryToAnswer(query));
 
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Silver ? ");
-        assertEquals(68, calculate.CalculateCredit(stringOfInterest, romanCalculate));
-
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Gold ? ");
-        assertEquals(57800, calculate.CalculateCredit(stringOfInterest, romanCalculate));
-
-        stringOfInterest = classifyParser.processSentence("how many Credits is glob prok Iron ? ");
-        assertEquals(782, calculate.CalculateCredit(stringOfInterest, romanCalculate));
-
-//        stringOfInterest = classifyParser.processSentence("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?");
-//        assertEquals(new String[]{"I have no idea what you are talking about"}, stringOfInterest);
+        query = "how much wood could a woodchuck chuck if a woodchuck could chuck wood ?";
+        driverClass.processSentenceAndStoreAnswers(query, romanCalculate);
+        assertEquals("I have no idea what you are talking about", driverClass.getQueryToAnswer(query));
 
     }
 }

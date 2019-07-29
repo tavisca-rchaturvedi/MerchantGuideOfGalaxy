@@ -1,11 +1,11 @@
 package com.tavisca.workshops.mgalaxy.roman;
 import java.util.HashMap;
 
-public class RomanNumeralCalculation {
+public class RomanNumeralCalculator {
     public HashMap<String, String> ItemToRomanValueHashMap = new HashMap<>();
     public HashMap<String, Double> ItemToCreditValueHashmap = new HashMap<>();
 
-    public void StoreItemToRomanValue(String[] values){
+    public void storeItemToRomanValue(String[] values){
         ItemToRomanValueHashMap.put(values[0], values[1]);
     }
 
@@ -21,7 +21,7 @@ public class RomanNumeralCalculation {
         return ItemToCreditValueHashmap.get(key);
     }
 
-    public String CalculateRomanNumeralFromAmountInWords(String amountInWords){
+    public String calculateRomanNumeralFromAmountInWords(String amountInWords){
         String[] words = amountInWords.split(" ");
         String romanNumeral = "";
         for(String word: words){
@@ -31,11 +31,12 @@ public class RomanNumeralCalculation {
         if(isValidRomanNumeral(romanNumeral))
             return romanNumeral;
         else
-            throw new RuntimeException("Roman Numeral Not valid");
+            return "";
     }
 
     // Todo : Implement the function finding whether given roman numeral is correct or not.
     public static boolean isValidRomanNumeral(String romanNumeral){
-        return true;
+        if(romanNumeral.contains("null"))return false;
+        else return true;
     }
 }
